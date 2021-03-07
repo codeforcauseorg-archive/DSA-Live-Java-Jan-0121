@@ -1,7 +1,5 @@
 package org.codeforcause.jdsa.lecture17;
 
-import org.codeforcause.jdsa.lecture5.DecToBin;
-
 public class Client {
     public static void main(String[] args) {
         Human abhijeet = new Human("Abhijeet");
