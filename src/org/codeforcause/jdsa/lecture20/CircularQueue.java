@@ -2,9 +2,9 @@ package org.codeforcause.jdsa.lecture20;
 
 public class CircularQueue {
     protected Integer[] data;
-    private int front;
-    private int end;
-    private int size;
+    protected int front;
+    protected int end;
+    protected int size;
     private static final int DEFAULT_SIZE = 10;
 
     CircularQueue(int size) {

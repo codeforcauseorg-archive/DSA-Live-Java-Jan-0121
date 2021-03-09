@@ -14,16 +14,30 @@ public class Main {
 //        System.out.println(queue);
 
 
-        CircularQueue circularQueue = new CircularQueue();
-        circularQueue.enqueue(23);
-        circularQueue.enqueue(12);
-        circularQueue.dequeue();
-        circularQueue.enqueue(76);
-        circularQueue.enqueue(33);
-        circularQueue.enqueue(92);
+//        CircularQueue circularQueue = new CircularQueue();
+//        circularQueue.enqueue(23);
+//        circularQueue.enqueue(12);
+//        circularQueue.dequeue();
+//        circularQueue.enqueue(76);
+//        circularQueue.enqueue(33);
+//        circularQueue.enqueue(92);
+//
+//        System.out.println(circularQueue);
 
-        System.out.println(circularQueue);
+        DynamicQueue dynamicQueue = new DynamicQueue();
+        for (int i = 0; i < 100; i++) {
+            dynamicQueue.enqueue(i);
+        }
 
+        for (int i = 0; i < 10; i++) {
+            dynamicQueue.dequeue();
+        }
+
+        for (int i = 0; i < 10; i++) {
+            dynamicQueue.enqueue(i);
+        }
+
+        System.out.println(dynamicQueue);
     }
 
 }
