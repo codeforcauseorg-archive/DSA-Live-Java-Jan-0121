@@ -44,7 +44,17 @@ public class CustomHashMap<K, V> {
     }
 
     private void rehash() {
-
+        ArrayList<LinkedList<Pair>> old = this.data;
+        this.data = new ArrayList<>();
+        for (int i = 0; i < old.size()*2; i++) {
+            this.data.add(new LinkedList<>());
+        }
+        this.size = 0;
+        for(LinkedList<Pair> list : old) {
+            for(Pair pair : list) {
+                put(pair.key, pair.value);
+            }
+        }
     }
 
     public V get(K key) {
@@ -110,12 +120,23 @@ public class CustomHashMap<K, V> {
     }
 
     public Collection<V> values() {
-        Collection<V> values = new HashSet<>();
+        Collection<V> values = new LinkedList<>();
         for(LinkedList<Pair> list : this.data) {
             for (Pair pair : list) {
                 values.add(pair.value);
             }
         }
         return values;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("Custom map: ");
+        for(LinkedList<Pair> list : this.data) {
+            for (Pair pair : list) {
+                str.append("[" + pair.key + " : " + pair.value + "] ");
+            }
+        }
+        return str.toString();
     }
 }
