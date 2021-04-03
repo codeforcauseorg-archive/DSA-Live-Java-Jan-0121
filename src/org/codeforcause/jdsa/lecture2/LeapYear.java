@@ -1,4 +1,4 @@
-package com.company.lecture2;
+package org.codeforcause.jdsa.lecture2;
 
 import java.util.Scanner;
 
