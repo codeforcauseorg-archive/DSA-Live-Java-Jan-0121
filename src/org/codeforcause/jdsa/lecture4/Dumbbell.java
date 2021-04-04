@@ -5,11 +5,9 @@ public class Dumbbell {
         dumb(5);
     }
     public static void dumb(int n){
-        int rowmirr = 0;
-        int row = 0;
+        int rowmirr = 0, row = 0, col, colmirr;
         while (rowmirr < 2 * n - 1) {
-            int colmirr = 0;
-            int col = 0;
+            colmirr = 0; col = 0;
             while (colmirr < 6 * n - 3) {
                 if(((row + col) < n - 1) || ((col > 2 * n - 2) && (row < n/2))){
                     System.out.print("  ");
