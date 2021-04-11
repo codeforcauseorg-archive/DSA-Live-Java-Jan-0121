@@ -6,6 +6,7 @@ public class LCS {
         String s2 = "alam";
         Integer[][] mem = new Integer[s1.length()+1][s2.length()+1];
         System.out.println(lcs(s1, s2, s1.length(), s2.length()));
+        System.out.println(lcsDP(s1, s2, s1.length(), s2.length(), mem));
         System.out.println(lcsDPItr(s1, s2, mem));
     }
 
@@ -20,6 +21,24 @@ public class LCS {
             int left = lcs(s1, s2, l1-1, l2);
             return Math.max(right, left);
         }
+    }
+
+    private static int lcsDP(String s1, String s2, int l1, int l2, Integer[][] mem) {
+        if (l1 == 0 || l2 == 0) {
+            return 0;
+        }
+        if (mem[l1][l2] != null) {
+            return mem[l1][l2];
+        } else {
+            if (s1.charAt(l1 - 1) == s2.charAt(l2 - 1)) {
+                mem[l1][l2] = 1 + lcsDP(s1, s2, l1 - 1, l2 - 1, mem);
+            } else {
+                int right = lcsDP(s1, s2, l1, l2 - 1, mem);
+                int left = lcsDP(s1, s2, l1 - 1, l2, mem);
+                mem[l1][l2] = Math.max(right, left);
+            }
+        }
+        return mem[l1][l2];
     }
 
     public static int lcsDPItr(String s1, String s2, Integer[][] mem) {
