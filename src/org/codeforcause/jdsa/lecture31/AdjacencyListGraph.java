@@ -71,6 +71,73 @@ public class AdjacencyListGraph <E> {
         }
     }
 
+    public List<LinkedList<E>> connectedComponents() {
+        List<LinkedList<E>> list = new LinkedList<>();
+        Set<Vertex> visited = new HashSet<>();
+        for (Vertex start : vertices.values()) {
+            if (visited.contains(start)) {
+                continue;
+            }
+            LinkedList<E> tempList = new LinkedList<>();
+            Stack<Vertex> stack = new Stack<>();
+            stack.push(start);
+            visited.add(start);
+            while (!stack.isEmpty()) {
+                Vertex currentVertex = stack.pop();
+                tempList.add(currentVertex.value);
+                for (Vertex padosi : currentVertex.neighbours) {
+                    if (!visited.contains(padosi)) {
+                        stack.push(padosi);
+                        visited.add(padosi);
+                    }
+                }
+            }
+            list.add(tempList);
+        }
+        return list;
+    }
+
+    public boolean isConnected() {
+        return this.connectedComponents().size() < 2;
+    }
+
+    public boolean isBipartite() {
+        Set<Vertex> red = new HashSet<>();
+        Set<Vertex> blue = new HashSet<>();
+        Stack<Vertex> stack = new Stack<>();
+        for (Vertex vertex : vertices.values()) {
+            if (!red.contains(vertex) && !blue.contains(vertex)){
+                stack.push(vertex);
+                red.add(vertex);
+                while (!stack.isEmpty()) {
+                    Vertex current = stack.pop();
+                    for (Vertex padosi : current.neighbours) {
+                        if (red.contains(current)) {
+                            if (red.contains(padosi)){
+                                return false;
+                            } else {
+                                if (!blue.contains(padosi)) {
+                                    stack.push(padosi);
+                                    blue.add(padosi);
+                                }
+                            }
+                        } else {
+                            if (blue.contains(padosi)){
+                                return false;
+                            } else {
+                                if (!red.contains(padosi)) {
+                                    stack.push(padosi);
+                                    red.add(padosi);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public void print() {
         for (Vertex vertex : vertices.values()) {
             System.out.print(vertex.value + "->");
